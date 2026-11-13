@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>Feral Baking Co.</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Order fresh sourdough bread, rolls and bagels from Feral Baking Co.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Young+Serif&display=swap">
+<style>
+body { margin: 0; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+/* Layout: one centered paper panel floating on the watercolor wildflower background.
+   Logo on top, menu cards in a responsive grid, then a short "how ordering works" strip. */
+:root {
+  --cream: #fbf1de;
+  --paper: rgba(252, 245, 230, 0.93);
+  --ink: #4f3524;
+  --ink-soft: #7a5c47;
+  --terracotta: #c9582a;
+  --terracotta-dark: #a8441d;
+  --sage: #6f8458;
+  --gold: #e2a42b;
+  --line: #e7d5b6;
+  --display: "Young Serif", Georgia, "Times New Roman", serif;
+  --body: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--cream) url("bg.jpg") center / cover fixed no-repeat;
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 40px 56px;
+}
+.panel {
+  max-width: 860px;
+  margin: 0 auto;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  padding: 32px clamp(18px, 5vw, 48px) 40px;
+  box-shadow: 0 18px 50px rgba(120, 80, 40, 0.14);
+}
+header { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.logo { width: 190px; height: auto; mix-blend-mode: multiply; }
+h1 { font-family: var(--display); font-weight: 400; font-size: clamp(1.9rem, 5vw, 2.6rem); margin: 0; text-wrap: balance; line-height: 1.15; }
+.lede { margin: 0; max-width: 46ch; color: var(--ink-soft); text-wrap: balance; }
+.setup {
+  margin: 22px 0 0; padding: 12px 16px; border-radius: 14px;
+  background: #fff4cf; border: 1px dashed var(--gold); font-size: 0.9rem;
+}
+.setup strong { color: var(--terracotta-dark); }
+h2 { font-family: var(--display); font-weight: 400; font-size: 1.5rem; margin: 36px 0 4px; }
+.sub { margin: 0 0 18px; color: var(--ink-soft); font-size: 0.95rem; }
+.multi {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px;
+  margin: 0 0 18px; padding: 16px 20px; border-radius: 18px;
+  background: #f6e3c0; border: 1px solid var(--gold);
+}
+.multi div { min-width: 0; flex: 1 1 240px; }
+.multi b { display: block; font-family: var(--display); font-weight: 400; font-size: 1.15rem; }
+.multi span { font-size: 0.92rem; color: var(--ink-soft); }
+.multi .btn { flex: 0 0 auto; }
+.group { font-family: var(--display); font-weight: 400; font-size: 1.25rem; margin: 26px 0 12px; color: var(--terracotta-dark); }
+.menu { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 230px), 1fr)); gap: 14px; }
+.item {
+  min-width: 0;
+  display: flex; flex-direction: column; justify-content: space-between; gap: 14px;
+  background: #fffaf0; border: 1px solid var(--line); border-radius: 18px; padding: 18px;
+}
+.item-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.item h3 { margin: 0; font-family: var(--display); font-weight: 400; font-size: 1.15rem; line-height: 1.25; text-wrap: balance; }
+.price { font-weight: 700; color: var(--sage); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.desc { margin: 6px 0 0; color: var(--ink-soft); font-size: 0.92rem; }
+.btn {
+  appearance: none; border: 0; cursor: pointer; text-decoration: none; text-align: center;
+  background: var(--terracotta); color: #fff; font: 700 0.95rem var(--body);
+  padding: 11px 18px; border-radius: 999px; transition: background 0.15s;
+}
+.btn:hover { background: var(--terracotta-dark); }
+.btn:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+.notice { font-size: 0.85rem; color: var(--terracotta-dark); margin: 6px 0 0; }
+.notice:empty { display: none; }
+.steps { list-style: none; margin: 8px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 14px; counter-reset: step; }
+.step { counter-increment: step; min-width: 0; padding: 14px 16px; border-left: 3px solid var(--sage); background: rgba(255, 250, 240, 0.7); border-radius: 0 12px 12px 0; }
+.step b { display: block; font-family: var(--display); font-weight: 400; margin-bottom: 2px; }
+.step b::before { content: counter(step) ". "; color: var(--sage); }
+.step span { font-size: 0.9rem; color: var(--ink-soft); }
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 12px; margin-top: 24px; }
+.facts div { min-width: 0; padding: 12px 16px; border-radius: 14px; background: #f6e3c0; border: 1px solid var(--gold); }
+.facts b { display: block; font-family: var(--display); font-weight: 400; color: var(--terracotta-dark); }
+.facts span { font-size: 0.92rem; }
+.notes { display: grid; gap: 12px; }
+.note { min-width: 0; padding: 14px 16px; border: 1px solid var(--line); border-radius: 14px; background: #fffaf0; }
+.note b { display: block; font-family: var(--display); font-weight: 400; margin-bottom: 4px; }
+.note p { margin: 0; font-size: 0.92rem; color: var(--ink-soft); }
+.policies { margin: 0; padding-left: 1.2rem; color: var(--ink-soft); font-size: 0.95rem; }
+footer { margin-top: 36px; text-align: center; font-size: 0.85rem; color: var(--ink-soft); }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="panel">
+  <header>
+    <img class="logo" src="logo.jpg" alt="Feral Baking Co. logo: a raccoon sitting on a loaf of bread">
+    <h1>Order fresh bakes</h1>
+    <p class="lede">Small-batch bread and sweets, baked to order. Pick what you want and pay securely with Stripe.</p>
+  </header>
+
+  <p class="setup" id="setup" hidden><strong>Setup mode.</strong> Some items are not connected to Stripe yet. This message disappears once every item has a link.</p>
+
+  <div class="facts">
+    <div><b>Preorder only</b><span>Order by Wednesday at 6PM for the upcoming bake.</span></div>
+    <div><b>Pickup</b><span>Saturdays, 9AM to noon.</span></div>
+  </div>
+
+  <h2>Before you order</h2>
+  <p class="sub">A few things to know before getting yourself into some delicious trouble.</p>
+  <div class="notes">
+    <div class="note">
+      <b>A little about our kitchen</b>
+      <p>Feral Baking Co. is a small, home-based microbakery operating under the Arizona Cottage Food Program. Our products are made in small batches in a home kitchen, with plenty of care and a healthy amount of sourdough starter.</p>
+    </div>
+    <div class="note">
+      <b>Home kitchen disclosure</b>
+      <p>This product was produced in a home kitchen that may come in contact with common food allergens and pet allergens and is not subject to public health inspection. Please review each product's ingredient list before ordering. Our products may contain or come into contact with common allergens. If you have a food allergy or dietary restriction, please contact us before placing an order. We cannot guarantee an allergen-free environment.</p>
+    </div>
+  </div>
+
+  <h2>The menu</h2>
+  <p class="sub">Choose from our standard menu or see what's causing trouble on our rotating specialty menu. Specialty items are offered in limited batches and may not be available every week. Press Order on any bake to choose your quantity and pay on Stripe's secure page.</p>
+  <div class="multi">
+    <div><b>Want more than one bake?</b><span>Use the multi-item order link to put several bakes in one order.</span></div>
+    <a class="btn" href="https://buy.stripe.com/eVq3cn1T40jf00sg7uffy0d" target="_blank" rel="noopener">Order multiple</a>
+  </div>
+  <h3 class="group">Breads &amp; Rolls</h3>
+  <div class="menu" id="menu-bread"></div>
+  <h3 class="group">Bagels</h3>
+  <div class="menu" id="menu-bagel"></div>
+
+  <h2>How ordering works</h2>
+  <ol class="steps">
+    <li class="step"><b>Browse the menu</b><span>Choose from our standard menu or see what's causing trouble on our rotating specialty menu. Specialty items are offered in limited batches and may not be available every week.</span></li>
+    <li class="step"><b>Place your preorder</b><span>All orders are preorder-only. Select your products and quantities, then complete checkout through our secure online payment system. Orders must be placed by Wednesdays at 6PM for the upcoming bake.</span></li>
+    <li class="step"><b>Watch for confirmation</b><span>Once your order is submitted and payment is complete, you'll receive an order confirmation. We'll send a separate notification when your order is ready for pickup.</span></li>
+    <li class="step"><b>Pick up your goodies</b><span>Orders are available for pickup on Saturdays from 9AM to noon. Your pickup instructions and location will be provided in your order confirmation or ready-for-pickup notification. Please plan to collect your order within the designated pickup window.</span></li>
+  </ol>
+
+  <h3 class="group">Pickup policies</h3>
+  <ul class="policies">
+    <li>Orders are made fresh to fulfill scheduled preorders.</li>
+    <li>Please double-check your order and pickup details before submitting payment.</li>
+    <li>If you need to make a change or have a question, contact us as soon as possible.</li>
+  </ul>
+
+  <footer>Feral Baking Co. &middot; A home-based microbakery under the Arizona Cottage Food Program</footer>
+</div>
+
+<script>
+/* ---- EDIT THIS PART ----
+   Each item needs a name, a group ("bread" or "bagel") and a Stripe Payment Link. Optional: desc (a short description)
+   and price (a number, shown on the page only; Stripe charges whatever is set in Stripe). */
+var STRIPE_LINKS = [
+  { name: "The Original Feral", group: "bread", desc: "Our original, naturally fermented sourdough. Simple, crusty, tangy, and unapologetically feral.", link: "https://buy.stripe.com/bJe3cneFQ1njfZqbReffy0c" },
+  { name: "Jalapeno Business", group: "bread", desc: "Classic sourdough with jalapeño juice, jalapeños, and plenty of cheddar. Tangy, cheesy, spicy, and just the right amount of trouble.", link: "https://buy.stripe.com/cNi3cn0P00jf9B2aNaffy0b" },
+  { name: "Choc Full of Problems", group: "bread", desc: "A rich chocolate sourdough loaf loaded with chocolate chips. Because apparently, regular bread wasn't dramatic enough.", link: "https://buy.stripe.com/28E7sD55g2rnaF62gEffy0a" },
+  { name: "Daily Bread", group: "bread", desc: "Soft, sliceable homemade sourdough bread for sandwiches, toast, and all your other acts of delicious domestic rebellion.", link: "https://buy.stripe.com/aFa4gr2X8gid4gI4oMffy09" },
+  { name: "Berry Bad Decisions", group: "bagel", desc: "Sweet, tangy, creamy, and a little unhinged. A 6-pack of our deliciously unhinged gourmet bagels, with inclusions of blueberry, lemon curd, and blueberry-vanilla goat cheese. Level up your bagel game.", link: "https://buy.stripe.com/9B6aEPapA2rncNe2gEffy07" },
+  { name: "The Usual Suspects", group: "bagel", desc: "6 of our standard bagels: plain, sesame, everything, blueberry, cinnamon raisin. A lineup of classic bagel favorites, ready to cause a little breakfast trouble.", link: "https://buy.stripe.com/4gM00bcxI6HDeVm1cAffy06" },
+  { name: "Cereal Killer", group: "bagel", desc: "Our monthly cereal offering. Six of our delicious sourdough bagels with favorite cereal toppings. A delight for your inner child (and actual children too).", link: "https://buy.stripe.com/fZuaEP8hsaXT8wY4oMffy05" },
+  { name: "The Nutty Professor", group: "bread", desc: "We take our Original Feral in all its glory, with inclusions of craisins and walnuts. A perfect slice for breakfast, or midday snack.", link: "https://buy.stripe.com/14AeV57do6HD3cE4oMffy04" },
+  { name: "Jalapeno Menaces", group: "bagel", desc: "6 spicy bagel buddies, filled with freshly diced jalapeno and a generous amount of cream cheese folded in.", link: "https://buy.stripe.com/8x200bdBM4zv6oQ8F2ffy03" },
+  { name: "The Flavor Goblin", group: "bagel", desc: "Our take on the everything bagel. 6 of our sourdough bagels with a generous helping of everything bagel seasoning.", link: "https://buy.stripe.com/aFafZ9btEaXT4gIg7uffy02" },
+  { name: "Cinna-maniac", group: "bread", desc: "This boule brings our strong sourdough flavor and elevates it with a tasty cinnamon sugar inclusion throughout. Life's too short, you deserve something sweet.", link: "https://buy.stripe.com/5kQ6oz2X81njcNe1cAffy01" },
+  { name: "Unbirthday Behavior", group: "bread", desc: "A little whimsical, a little rebellious, and perfect for a sweet loaf that doesn't need an excuse to celebrate. Inclusions of white chocolate and rainbow sprinkles. Each loaf tells us what she needs, and then we add a little extra.", link: "https://buy.stripe.com/14AcMX9lw0jf28AaNaffy00" },
+  { name: "Buns of Anarchy", group: "bread", desc: "Soft, fluffy dinner rolls ready to cause a little delicious chaos at the dinner table. Comes in a pack of 6 sizable rolls.", link: "https://buy.stripe.com/00wbITdBM5DzfZqf3qffy08" }
+];
+/* ---- END EDIT ---- */
+
+(function () {
+  var menus = { bread: document.getElementById('menu-bread'), bagel: document.getElementById('menu-bagel') };
+  var missing = 0;
+  STRIPE_LINKS.forEach(function (it) {
+    if (!it.link) missing++;
+    var card = document.createElement('div');
+    card.className = 'item';
+    card.innerHTML =
+      '<div>' +
+        '<div class="item-top"><h3></h3><span class="price"></span></div>' +
+        '<p class="desc"></p>' +
+      '</div>' +
+      '<div><a class="btn" target="_blank" rel="noopener" style="display:block">Order</a>' +
+      '<p class="notice" aria-live="polite"></p></div>';
+    card.querySelector('h3').textContent = it.name;
+    var price = card.querySelector('.price');
+    if (typeof it.price === 'number') price.textContent = '$' + it.price.toFixed(2); else price.remove();
+    var desc = card.querySelector('.desc');
+    if (it.desc) desc.textContent = it.desc; else desc.remove();
+    var btn = card.querySelector('.btn');
+    var note = card.querySelector('.notice');
+    if (it.link) {
+      btn.href = it.link;
+    } else {
+      btn.href = '#';
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        note.textContent = 'This item is not connected to Stripe yet.';
+      });
+    }
+    menus[it.group || 'bread'].appendChild(card);
+  });
+  if (missing > 0) document.getElementById('setup').hidden = false;
+})();
+</script>
+</body>
+</html>
